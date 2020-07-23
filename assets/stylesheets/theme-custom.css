@@ -1,0 +1,63 @@
+/* Add here all your CSS customizations */
+.body-sign{
+	max-width: 420px;
+}
+.body-sign .panel-sign .panel-body {
+    padding: 33px 33px 33px;
+}
+.btn-primary-gradient{	
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #0088cc;    
+	background: linear-gradient(180deg,#89f7fe,#66a6ff);
+	border: none;
+	box-shadow: 0 0 5px 1px #66a6ff;
+}
+.btn-brown-gradient{
+	color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #0088cc;    
+	background: linear-gradient(90deg,#d59e8f,#0094de);
+	border: none;
+	box-shadow: 0 0 5px 1px #dfa579;	
+	transition: all 0.9s linear;
+}
+.btn-brown-gradient.btn-brown-gradient:hover{
+	color: #ffffff;
+	background: linear-gradient(90deg,#0094de,#d59e8f);
+	box-shadow: 0 0 10px 1px #dfa579;	
+}
+.body-sign .panel-sign .panel-body {
+    border-top-color: #0094de;
+}
+.body-sign .panel-sign .panel-title-sign .title {
+    background-color: #0094de;
+}
+.panel-heading{
+	padding: 15px 10px;
+}
+
+/*css custom flexi grid*/
+.flexigrid div.tDiv {
+    background: #ececec;
+    position: relative;    
+     border: 1px solid #d7d7d7;
+    border-bottom: 0px;
+    overflow: hidden;
+}
+.flexigrid div.hDiv {
+    background: #ececec;
+    position: relative;
+    border: 1px solid #d7d7d7;
+    border-bottom: 1px solid #d3d3d3;
+    overflow: hidden;
+}
+.flexigrid div.pDiv {
+    background: #ececec;
+    border: 1px solid #d7d7d7;
+    border-top: 0px;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    padding-top: 2px;
+}
