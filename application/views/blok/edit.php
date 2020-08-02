@@ -5,7 +5,7 @@
 		<!-- Basic -->
 		<meta charset="UTF-8">
 		<title>Edit Blok | <?php echo function_lib::get_config_value('website_name'); ?></title>
-		<meta name="keywords" content="Dashboard Admin - Tutorial UMY" />
+		<meta name="keywords" content="Dashboard Admin - Jendela BPS" />
 		<meta name="description" content="<?php echo function_lib::get_config_value('website_seo'); ?>">
 		<meta name="author" content="Drestaputra - Inolabs">
 

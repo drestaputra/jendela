@@ -5,7 +5,7 @@
 		<!-- Basic -->
 		<meta charset="UTF-8">
 
-		<meta name="keywords" content="Dashboard Admin - Tutorial UMY" />
+		<meta name="keywords" content="Dashboard Admin - Jendela BPS" />
 		<meta name="description" content="Porto Admin - Responsive HTML5 Template">
 		<meta name="author" content="okler.net">
 

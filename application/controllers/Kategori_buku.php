@@ -56,12 +56,13 @@ class Kategori_buku extends CI_Controller {
           $no++;
                       
             $actions='<a class="btn btn-xs btn-primary" href="'.base_url().'kategori_buku/edit/'.$id_kategori_buku.'" title="Edit"><i class="fa fa-pencil"></i></a>'.' '.'<a class="btn btn-xs btn-danger" onclick="return confirm(\'Yakin hapus?\');" href="'.base_url().'kategori_buku/hapus/'.$id_kategori_buku.'" title="Hapus"><i class="fa fa-trash"></i></a>';            
+            $gambar_kategori_buku_img = '<img class="img-responsive" style="height=\'200px\';width=\'200px;\'" src="'.base_url('assets/kategori_buku/').$gambar_kategori_buku.'">';
             $entry = array('id' => $id_kategori_buku,
                 'cell' => array(
                     'actions' =>  $actions,
                     'no' =>  $no,                    
                     'nama_kategori_buku' =>(trim($nama_kategori_buku)!="")?$nama_kategori_buku:"",
-                    'gambar_kategori_buku' =>(trim($gambar_kategori_buku)!="")?$gambar_kategori_buku:"",                    
+                    'gambar_kategori_buku' =>(trim($gambar_kategori_buku)!="")?$gambar_kategori_buku_img:"",                    
                 ),
             );
             $json_data['rows'][] = $entry;
@@ -76,13 +77,13 @@ class Kategori_buku extends CI_Controller {
     	if ($this->input->post()) {
     		$validasi=$this->Mkategori_buku->validasi();
     		if ($validasi['status']==200) {
-    			$this->Mkategori_buku->simpan();
-    			redirect(base_url('kategori_buku'));
+    			$response = $this->Mkategori_buku->simpan();
+    			redirect(base_url('kategori_buku/index?status='.$response['status'].'&msg='.base64_encode($response['msg']).''));
     		}else{    			
     			redirect(base_url('kategori_buku/tambah?status='.$validasi['status'].'&msg='.base64_encode($validasi['msg']).''));
     		}
     	}        
-    	$this->load->view('kategori_buku/tambah',$data);
+    	$this->load->view('kategori_buku/tambah',null);
     }
     public function hapus($id_kategori_buku){
     	$cek_id=$this->function_lib->get_one('id_kategori_buku','kategori_buku','id_kategori_buku="'.$id_kategori_buku.'"');
@@ -94,15 +95,15 @@ class Kategori_buku extends CI_Controller {
     	}
     }
     public function edit($id_kategori_buku){
-    	$data_kategori_buku=$this->function_lib->get_row('*','kategori_buku','id_kategori_buku="'.$id_kategori_buku.'"');
+    	$data_kategori_buku=$this->function_lib->get_row('kategori_buku','id_kategori_buku="'.$id_kategori_buku.'"');
     	if (empty($data_kategori_buku)) {
     		redirect(base_url('kategori_buku?status=500&msg='.base64_encode("kategori_buku tidak ditemukan").''));
     	}
     	if ($this->input->post()) {
     		$validasi=$this->Mkategori_buku->validasi();
     		if ($validasi['status']=="200") {
-    			$this->Mkategori_buku->edit($id_kategori_buku);
-    			redirect(base_url('kategori_buku?status=200&msg='.base64_encode("Berhasil edit").''));
+    			$response=$this->Mkategori_buku->edit($id_kategori_buku);
+    			redirect(base_url('kategori_buku?status='.$response['status'].'&msg='.base64_encode($response['msg']).''));
     		}else{
     			redirect(base_url('kategori_buku?status=500&msg='.base64_encode($validasi['msg']).''));
     		}

@@ -1,11 +1,11 @@
-<!doctype html>
-<html class="fixed">
+<!DOCTYPE html>
+<html lang="en" class="fixed">
 	<head>
 
 		<!-- Basic -->
 		<meta charset="UTF-8">
 		<title>Tambah Blok | <?php echo function_lib::get_config_value('website_name'); ?></title>
-		<meta name="keywords" content="Dashboard Admin - Tutorial UMY" />
+		<meta name="keywords" content="Dashboard Admin - Jendela BPS" />
 		<meta name="description" content="<?php echo function_lib::get_config_value('website_seo'); ?>">
 		<meta name="author" content="Drestaputra - Inolabs">
 
@@ -19,8 +19,7 @@
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/bootstrap/css/bootstrap.css" />
 
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/font-awesome/css/font-awesome.css" />
-		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/magnific-popup/magnific-popup.css" />
-		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
+		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/magnific-popup/magnific-popup.css" />		
 
 		<!-- Specific Page Vendor CSS -->
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.custom.css" />
@@ -79,45 +78,25 @@
                             <?php if (trim($this->input->get('status'))!=""): ?>
                                 <?php echo function_lib::response_notif($this->input->get('status'),$this->input->get('msg')); ?>
                             <?php endif ?>
-                               <form id="form" method="POST" class="form-horizontal">
+                               <form id="form" method="POST" class="form-horizontal" enctype="multipart/form-data">
                                 <section class="panel">
                                     
                                     <div class="panel-body">
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">Nama Blok <span class="required">*</span></label>
+                                            <label class="col-sm-2 control-label">Nama Kategori Buku <span class="required">*</span></label>
                                             <div class="col-sm-10">
                                                                                                     
-                                                    <input type="text" name="nama_blok" value="<?php echo ($this->input->post('nama_blok')!="")?$this->input->post('nama_blok'):""; ?>" class="form-control" placeholder="Nama blok.." required/>
+                                                    <input type="text" name="nama_kategori_buku" value="<?php echo ($this->input->post('nama_kategori_buku')!="")?$this->input->post('nama_kategori_buku'):""; ?>" class="form-control" placeholder="Nama blok.." required/>
                                                 
                                             </div>                                            
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">Deskripsi Blok <span class="required">*</span></label>
+                                            <label class="col-sm-2 control-label">Gambar Kategori Buku <span class="required">*</span></label>
                                             <div class="col-sm-10">
-                                                  <textarea id="ckeditor" name="deskripsi_blok"><?php echo ($this->input->post('deskripsi_blok')!="")?$this->input->post('deskripsi_blok'):""; ?></textarea>
+                                                <input type="file" class="form-control" name="gambar_kategori_buku">
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                                <label class="col-md-2 control-label">Jumlah Tempat Duduk</label>
-                                                <div class="col-md-7">
-                                                    <div data-plugin-spinner data-plugin-options='{ "value":9, "min": 9, "max": 23}'>
-                                                        <div class="input-group" style="width:150px;">
-                                                            <input type="text" class="spinner-input form-control" name="jumlah_tempat_duduk" maxlength="3" readonly>
-                                                            <div class="spinner-buttons input-group-btn">
-                                                                <button type="button" class="btn btn-default spinner-up">
-                                                                    <i class="fa fa-angle-up"></i>
-                                                                </button>
-                                                                <button type="button" class="btn btn-default spinner-down">
-                                                                    <i class="fa fa-angle-down"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <p>
-                                                        <code>Jumlah tempat duduk</code> min 9 max 23
-                                                    </p>
-                                                </div>
-                                            </div>
+
                                     </div>
                                     <footer class="panel-footer">
                                         <div class="row">
@@ -141,8 +120,7 @@
         <script src="<?php echo base_url(); ?>assets/vendor/jquery/jquery.js"></script>
         <script src="<?php echo base_url(); ?>assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
         <script src="<?php echo base_url(); ?>assets/vendor/bootstrap/js/bootstrap.js"></script>
-        <script src="<?php echo base_url(); ?>assets/vendor/nanoscroller/nanoscroller.js"></script>
-        <script src="<?php echo base_url(); ?>assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+        <script src="<?php echo base_url(); ?>assets/vendor/nanoscroller/nanoscroller.js"></script>        
         <script src="<?php echo base_url(); ?>assets/vendor/magnific-popup/magnific-popup.js"></script>
         <script src="<?php echo base_url(); ?>assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
         
@@ -161,11 +139,8 @@
         
         <!-- Theme Initialization Files -->
         <script src="<?php echo base_url(); ?>assets/javascripts/theme.init.js"></script>
-		
-        <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+		        
         <script src="<?php echo base_url(); ?>assets/javascripts/forms/examples.validation.js"></script>        
-        <script>
-            CKEDITOR.replace( 'ckeditor' );
-        </script>
+       
 	</body>
 </html>

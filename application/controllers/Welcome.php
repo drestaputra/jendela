@@ -23,6 +23,9 @@ class Welcome extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Madmin');
 	}
+	public function index(){
+		redirect(base_url('login'));
+	}
 	public function login()
 	{
 		if (!empty($this->session->userdata('admin'))) {

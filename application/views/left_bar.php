@@ -1,3 +1,4 @@
+<?php $cont=$this->uri->segment(1, 0); ?>
 <aside id="sidebar-left" class="sidebar-left">
 				
 					<div class="sidebar-header">
@@ -13,19 +14,25 @@
 						<div class="nano-content">
 							<nav id="menu" class="nav-main" role="navigation">
 								<ul class="nav nav-main">
-									<li class="nav-active">
+									<li <?php if (isset($cont) AND trim($cont)!="" AND $cont=="dashboard"): ?>
+										 class="nav-active"
+									<?php endif ?>>
 										<a href="<?php echo base_url('dashboard'); ?>">
 											<i class="fa fa-home" aria-hidden="true"></i>
 											<span>Dashboard</span>
 										</a>
 									</li>
-									<li>
+									<li <?php if (isset($cont) AND trim($cont)!="" AND $cont=="kategori_buku"): ?>
+										 class="nav-active"
+									<?php endif ?>>
 										<a href="<?php echo base_url('kategori_buku'); ?>">											
 											<i class="fa fa-list-alt" aria-hidden="true"></i>
 											<span>Kategori Buku</span>
 										</a>
 									</li>
-									<li>
+									<li <?php if (isset($cont) AND trim($cont)!="" AND $cont=="buku"): ?>
+										 class="nav-active"
+									<?php endif ?>>
 										<a href="<?php echo base_url('buku'); ?>">											
 											<i class="fa fa-user" aria-hidden="true"></i>
 											<span>Buku</span>

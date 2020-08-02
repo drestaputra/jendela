@@ -4,8 +4,8 @@
 
 		<!-- Basic -->
 		<meta charset="UTF-8">
-		<title>Edit Blok | <?php echo function_lib::get_config_value('website_name'); ?></title>
-		<meta name="keywords" content="Dashboard Admin - Tutorial UMY" />
+		<title>Edit Kategori Buku | <?php echo function_lib::get_config_value('website_name'); ?></title>
+		<meta name="keywords" content="Dashboard Admin - Jendela BPS" />
 		<meta name="description" content="<?php echo function_lib::get_config_value('website_seo'); ?>">
 		<meta name="author" content="Drestaputra - Inolabs">
 
@@ -52,7 +52,7 @@
 
 				<section role="main" class="content-body">
 					<header class="page-header">
-						<h2>Blok</h2>
+						<h2>Kategori Buku</h2>
 					
 						<div class="right-wrapper pull-right">
 							<ol class="breadcrumbs">
@@ -61,7 +61,7 @@
 										<i class="fa fa-home"></i>
 									</a>
 								</li>
-								<li><span>Blok</span></li>
+								<li><span>Kategori Buku</span></li>
 							</ol>
 					
 							<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
@@ -69,61 +69,32 @@
 					</header>
 					<div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Edit Blok</h3>
+                            <h3 class="panel-title">Edit Kategori Buku</h3>
                         </div>
                            <div class="panel panel-body">
                             <?php if (trim($this->input->get('status'))!=""): ?>
                                 <?php echo function_lib::response_notif($this->input->get('status'),$this->input->get('msg')); ?>
                             <?php endif ?>
-                               <form id="form" method="POST" class="form-horizontal">
-                                <section class="panel">
-                                    <header class="panel-heading">
-                                        <div class="panel-actions">
-                                            <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
-                                            <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
-                                        </div>
-
-                                        <h2 class="panel-title">Basic Form Validation</h2>
-                                        <p class="panel-subtitle">
-                                            Basic validation will display a label with the error after the form control.
-                                        </p>
-                                    </header>
+                               <form id="form" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                                <section class="panel">                                    
                                     <div class="panel-body">
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">Nama Blok <span class="required">*</span></label>
+                                            <label class="col-sm-2 control-label">Nama Kategori Buku <span class="required">*</span></label>
                                             <div class="col-sm-10">
                                                                                                     
-                                                    <input type="text" name="nama_blok" value="<?php echo (trim($blok['nama_blok'])!="")?$blok['nama_blok']:""; ?>" class="form-control" placeholder="Nama blok.." required/>
+                                                    <input type="text" name="nama_kategori_buku" value="<?php echo (trim($kategori_buku['nama_kategori_buku'])!="")?$kategori_buku['nama_kategori_buku']:""; ?>" class="form-control" placeholder="Nama blok.." required/>
                                                 
                                             </div>                                            
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">Deskripsi Blok <span class="required">*</span></label>
-                                            <div class="col-sm-10">
-                                                  <textarea id="ckeditor" name="deskripsi_blok"><?php echo (trim($blok['deskripsi_blok'])!="")?$blok['deskripsi_blok']:""; ?></textarea>
+                                        </div>                                      
+                                         <div class="form-group">
+                                            <label class="col-sm-2 control-label">Gambar Kategori Buku <span class="required">*</span></label>
+                                            <div class="col-sm-4">
+                                                <input type="file" class="form-control" name="gambar_kategori_buku">
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <img class="img-responsive img-thumbnail" src="<?php echo base_url('assets/kategori_buku/'.$kategori_buku['gambar_kategori_buku']); ?>">
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                                <label class="col-md-2 control-label">Jumlah Tempat Duduk</label>
-                                                <div class="col-md-7">
-                                                    <div data-plugin-spinner data-plugin-options='{ "value":9, "min": 9, "max": 23}'>
-                                                        <div class="input-group" style="width:150px;">
-                                                            <input type="text" class="spinner-input form-control" name="jumlah_tempat_duduk" maxlength="3" readonly value="<?php echo (trim($blok['jumlah_tempat_duduk'])!="")?$blok['jumlah_tempat_duduk']:""; ?>">
-                                                            <div class="spinner-buttons input-group-btn">
-                                                                <button type="button" class="btn btn-default spinner-up">
-                                                                    <i class="fa fa-angle-up"></i>
-                                                                </button>
-                                                                <button type="button" class="btn btn-default spinner-down">
-                                                                    <i class="fa fa-angle-down"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <p>
-                                                        <code>Jumlah tempat duduk</code> min 9 max 23
-                                                    </p>
-                                                </div>
-                                            </div>
                                     </div>
                                     <footer class="panel-footer">
                                         <div class="row">

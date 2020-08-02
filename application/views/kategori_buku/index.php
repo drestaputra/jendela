@@ -5,7 +5,7 @@
 		<!-- Basic -->
 		<meta charset="UTF-8">
 		<title>Kategori Buku | <?php echo function_lib::get_config_value('website_name'); ?></title>
-		<meta name="keywords" content="Dashboard Admin - Tutorial UMY" />
+		<meta name="keywords" content="Dashboard Admin - Jendela BPS" />
 		<meta name="description" content="<?php echo function_lib::get_config_value('website_seo'); ?>">
 		<meta name="author" content="Drestaputra - Inolabs">
 
@@ -142,8 +142,7 @@
                             { display: 'No', name: 'no', width: 30, sortable: true, align: 'right' },
                             { display: 'Aksi', name: 'actions', width: 100, sortable: false, align: 'center' },
                             { display: 'Nama Kategori Buku', name: 'nama_kategori_buku', width: 200, sortable: true, align: 'left' },
-                            { display: 'Deskripsi Kategori Buku', name: 'deskripsi_kategori_buku', width: 250, sortable: true, align: 'left' },
-                            { display: 'Jumlah Tempat Duduk', name: 'jumlah_tempat_duduk', width: 200, sortable: true, align: 'left' },
+                            { display: 'Gambar Kategori Buku', name: 'gambar_kategori_buku', width: 200, sortable: true, align: 'left' },
                            
                         ],
                         buttons: [

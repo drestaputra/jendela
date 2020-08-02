@@ -282,16 +282,6 @@ class Function_lib {
         return $response;
     }
 
-     /**
-    *dapatkan value config
-    *@param string $config_index
-    */
-    public static function get_config_value($config_index)
-    {
-        $lib=new function_lib;
-        $value=$lib->get_one('configuration_value','site_configuration','configuration_index="'.$config_index.'"');
-        return ($value!='')?$value:'';
-    }
 
     /**
      * fungsi standar untuk get 1 baris
@@ -336,5 +326,24 @@ class Function_lib {
       setlocale (LC_TIME, $lang);                  
       $tanggal=date($format,strtotime($date));
       return $tanggal;
+    }
+    public static function response_notif($status,$message)
+    {      
+        if ($status==200) {            
+            $html='<div class="alert alert-success">'.base64_decode($message).'</div>';
+        }else{            
+            $html='<div class="alert alert-danger">'.base64_decode($message).'</div>';
+        }
+      return $html;
+    }
+    /**
+    dapatkan value config
+    @param string $config_index
+    */
+    public static function get_config_value($config_index)
+    {
+        $lib=new function_lib;
+        $value=$lib->get_one('configuration_value','site_configuration','configuration_index="'.$config_index.'"');
+        return ($value!='')?$value:'';
     }
 }
