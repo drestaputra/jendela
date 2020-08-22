@@ -17,9 +17,20 @@ class Mbuku extends CI_Model {
         if (trim($order_by)) {
             $params['order_by'] = $order_by;
         }
-        $pencarian=$this->input->post('pencarian');
+        $pencarian=$this->input->post('pencarian',TRUE);        
         if (trim($pencarian)!="") {
-            $where.=' AND (judul_buku like "%'.$pencarian.'%" OR deskripsi_buku like "%'.$pencarian.'%")';
+            $where.=' AND (judul_buku like "%'.$this->db->escape_str($pencarian).'%" OR deskripsi_buku like "%'.$this->db->escape_str($pencarian).'%")';
+        }
+        $nama_survei = $this->input->post('nama_survei',TRUE);
+        if (trim($nama_survei)!="") {
+            $where .= ' AND id_kategori_buku IN (SELECT id_kategori_buku FROM kategori_buku WHERE id_survei IN (SELECT id_survei FROM survei WHERE UPPER(nama_survei) LIKE "%'.strtoupper($this->db->escape_str($nama_survei)).'%"))';
+        }
+        $id_kategori_buku = $this->input->post('id_kategori_buku',TRUE);
+        $nama_kategori_buku = $this->input->post('nama_kategori_buku');
+        if (trim($nama_kategori_buku) !="") {
+            $where .= ' AND id_kategori_buku IN (SELECT id_kategori_buku FROM kategori_buku WHERE UPPER(nama_kategori_buku)="'.strtoupper($nama_kategori_buku).'")';            
+        }else if(trim($id_kategori_buku) !=""){
+            $where .= ' AND id_kategori_buku="'.$id_kategori_buku.'"';            
         }
         if(isset($_POST["sort"]["type"]) && isset($_POST["sort"]["field"]) && ($_POST["sort"]["type"]!="" && $_POST["sort"]["field"]!="")){
             $params["order_by"]=$_POST["sort"]["field"].' '.$_POST["sort"]["type"];

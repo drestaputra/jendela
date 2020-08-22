@@ -86,7 +86,7 @@
                                     	<div class="form-group">
                                             <label class="col-sm-2 control-label">Kategori Buku <span class="required">*</span></label>
                                             <div class="col-sm-10">
-                                                <select name="id_kategori_buku">                                                	
+                                                <select name="id_kategori_buku" style="width: 200px" required>
                                                 	<?php foreach ($kategori_buku as $key => $value): ?>
                                                 		<option value="<?php echo $value['id_kategori_buku']; ?>"><?php echo $value['nama_kategori_buku']; ?></option>
                                                 	<?php endforeach ?>
@@ -157,13 +157,12 @@
 		        
         <script src="<?php echo base_url(); ?>assets/javascripts/forms/examples.validation.js"></script>               
         <script src="<?php echo base_url(); ?>assets/ckeditor/ckeditor.js"></script>
-        <script src="<?php echo base_url(); ?>assets/javascripts/forms/examples.validation.js"></script>     
-        <script type="text/javascript" src="<?php echo base_url(); ?>assets/ckeditor/plugins/chart/lib/chart.min.js"></script>   
-        <script type="text/javascript" src="<?php echo base_url(); ?>assets/ckeditor/plugins/chart/widget2chart.js"></script>   
+        <script src="<?php echo base_url(); ?>assets/javascripts/forms/examples.validation.js"></script>             
         <script>
        		$("select[name=id_kategori_buku]").select2();
             var ckeditor = CKEDITOR.replace( 'editor' , {
                 filebrowserImageBrowseUrl : '<?php echo base_url('assets/kcfinder/browse.php');?>',
+                extraPlugins: 'uploadimage',
                 height: '400px' 
             } );            
         </script>

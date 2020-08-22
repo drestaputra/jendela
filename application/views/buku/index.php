@@ -26,6 +26,7 @@
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.custom.css" />
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css" />
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/morris/morris.css" />
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/select2/select2.css" />
 
 		<!-- Theme CSS -->
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/stylesheets/theme.css" />
@@ -76,19 +77,54 @@
 						<?php if (trim($this->input->get('status'))!=""): ?>
                                 <?php echo function_lib::response_notif($this->input->get('status'),$this->input->get('msg')); ?>
                             <?php endif ?>
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4><i class="fa fa-search-plus"> Pencarian</i></h4>
 								</div>
 								<div class="panel-body">
 									<form>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-3">Judul Buku</label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control input-sm" name="judul_buku" id="judul_buku">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3">Deskripsi</label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control input-sm" name="deskripsi_buku" id="deskripsi_buku">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                 <div class="form-group">
+                                                    <label class="col-md-3">Survei</label>
+                                                    <div class="col-md-9">
+                                                    <select class="form-control select2" id="survei" onchange="getKategori($(this));">
+                                                        <option value=""> Pilih survei</option>
+                                                        <?php foreach ($survei as $key => $value): ?>
+                                                            <option value="<?php echo $value['id_survei'] ?>"><?php echo $value['nama_survei']; ?></option>
+                                                        <?php endforeach ?>
+                                                    </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3">Kategori</label>
+                                                    <div class="col-md-9">
+                                                        <select class="form-control select2" id="kategori_buku">
+                                                            <option value="">Semua kategori</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+										<br>
+                                       
 										<div class="form-group">
-											<label>Judul Buku</label>
-											<input type="text" class="form-control input-sm" name="judul_buku" id="judul_buku">
-										</div>
-										<div class="form-group">
-											<button class="btn btn-primary pull-right" onclick="grid_reload();return false;"> Cari</button>
+											<button class="btn btn-primary pull-right" onclick="grid_reload();return false;"><i class="fa fa-search"></i> Cari</button>
 										</div>
 									</form>
 								</div>
@@ -118,6 +154,7 @@
 		<script src="<?php echo base_url(); ?>assets/vendor/jquery-ui/js/jquery-ui-1.10.4.custom.js"></script>
 		<script src="<?php echo base_url(); ?>assets/vendor/jquery-ui-touch-punch/jquery.ui.touch-punch.js"></script>
 		<script src="<?php echo base_url(); ?>assets/vendor/jquery-appear/jquery.appear.js"></script>
+        <script src="<?php echo base_url(); ?>assets/vendor/select2/select2.js"></script>
 				
 		
 		
@@ -134,19 +171,42 @@
         
 		<!-- Examples -->
 		<script type="text/javascript">
-			 
+			         $('.select2').select2();
+                     function getKategori(selectedVal){
+                        $('#kategori_buku').empty().trigger('change');
+                        var selected = selectedVal.val();                        
+                        var data = {
+                            id: "",
+                            text: "Semua kategori"
+                        };
+                        var newOptionDefault = new Option(data.text, data.id, false, false);                                
+                        $('#kategori_buku').append(newOptionDefault).trigger('change');                                
+                        $.getJSON('<?php echo base_url('buku/getKategori') ?>', {id_survei: selected}, function(json, textStatus) {
+                            json.data.forEach( function(element, index) {
+                                var data = {
+                                    id: element['id_kategori_buku'],
+                                    text: element['nama_kategori_buku']
+                                };
+
+                                var newOption = new Option(data.text, data.id, false, false);                                
+                                $('#kategori_buku').append(newOption).trigger('change');                                
+                            });
+                        });
+
+                     }
                     $("#gridview").flexigrid({
                         dataType: 'json',
                         colModel: [
 						
                             { display: 'No', name: 'no', width: 30, sortable: true, align: 'right' },
                             { display: 'Aksi', name: 'actions', width: 100, sortable: false, align: 'center' },
-                            { display: 'Judul', name: 'judul_buku', width: 200, sortable: true, align: 'center' },
-                            { display: 'Rating', name: 'rating_buku', width: 70, sortable: true, align: 'center' },
-                            { display: 'Deskripsi', name: 'deskripsi_buku', width: 200, sortable: true, align: 'center' },
-                            { display: 'View', name: 'jumlah_view', width: 100, sortable: true, align: 'center' },
-                            { display: 'Favorit', name: 'jumlah_favorit', width: 100, sortable: true, align: 'center' },
+                            { display: 'Judul', name: 'judul_buku', width: 120, sortable: true, align: 'center' },
+                            // { display: 'Rating', name: 'rating_buku', width: 70, sortable: true, align: 'center' },
+                            { display: 'Deskripsi', name: 'deskripsi_buku', width: 120, sortable: true, align: 'center' },
+                            { display: 'View', name: 'jumlah_view', width: 70, sortable: true, align: 'center' },
+                            { display: 'Favorit', name: 'jumlah_favorit', width: 70, sortable: true, align: 'center' },
                             { display: 'Gambar Buku', name: 'gambar_buku', width: 200, sortable: true, align: 'center' },
+                            { display: 'Kategori', name: 'kategori_buku', width: 200, sortable: true, align: 'center' },
                            
                         ],
                         buttons: [
@@ -233,8 +293,14 @@
 
                     function grid_reload() {
                         var judul_buku=$("#judul_buku").val();
+                        var deskripsi=$("#deskripsi_buku").val();
+                        var survei=$("#survei").val();
+                        var kategori_buku=$("#kategori_buku").val();
                         
-                        var url_service="?judul_buku="+judul_buku;
+                        var url_service="?judul_buku="+judul_buku+
+                        "&deskripsi="+deskripsi+
+                        "&survei="+survei+
+                        "&kategori_buku="+kategori_buku;
                         $("#gridview").flexOptions({url:'<?php echo base_url(); ?>buku/get_data'+url_service}).flexReload();
                     }
                     

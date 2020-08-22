@@ -12,8 +12,9 @@ class Kategori_buku extends CI_Controller {
 		}
 	}
 	public function index()
-	{
-		$this->load->view('kategori_buku/index');
+	{        
+        $data['nama_survei'] = $this->function_lib->findAll('status!="hapus"','survei','nama_survei ASC');
+		$this->load->view('kategori_buku/index',$data,FALSE);
 	}
 
 	function get_data() {        
@@ -21,19 +22,25 @@ class Kategori_buku extends CI_Controller {
         $params['table'] = 'kategori_buku';
 
         $nama_kategori_buku=$this->input->get('nama_kategori_buku',true);
+        $status_kategori=$this->input->get('status_kategori',true);
                 
         $params['select'] = "
             *
         ";
         $params['join'] = "
         ";
-        $params['where'] = "1";
+        $params['where'] = " status!='hapus'";
       
         if(trim($nama_kategori_buku)!='')
         {
             $params['where'].=' AND nama_kategori_buku LIKE "%'.$nama_kategori_buku.'%"';
         }        
 		
+        if(trim($status_kategori)!='')
+        {
+            $params['where'].=' AND status  = "'.$status_kategori.'"';
+        }        
+        
         $params['order_by'] = "
             id_kategori_buku DESC
         ";
@@ -55,14 +62,23 @@ class Kategori_buku extends CI_Controller {
             }
           $no++;
                       
-            $actions='<a class="btn btn-xs btn-primary" href="'.base_url().'kategori_buku/edit/'.$id_kategori_buku.'" title="Edit"><i class="fa fa-pencil"></i></a>'.' '.'<a class="btn btn-xs btn-danger" onclick="return confirm(\'Yakin hapus?\');" href="'.base_url().'kategori_buku/hapus/'.$id_kategori_buku.'" title="Hapus"><i class="fa fa-trash"></i></a>';            
+            $actions='<a class="btn btn-xs btn-primary" href="'.base_url().'kategori_buku/edit/'.$id_kategori_buku.'" title="Edit"><i class="fa fa-pencil"></i></a>';            
+            if ($status == "aktif") {
+                $actions .=' <a class="btn btn-xs btn-danger" onclick="return confirm(\'Yakin hapus?\');" href="'.base_url().'kategori_buku/hapus/'.$id_kategori_buku.'?s=hapus" title="Hapus"><i class="fa fa-trash"></i></a>';            
+                $actions .= ' <a class="btn btn-xs btn-warning" onclick="return confirm(\'Yakin me non-aktifkan?\');" href="'.base_url().'kategori_buku/hapus/'.$id_kategori_buku.'?s=non_aktif" title="Non Aktif"><i class="fa fa-power-off"></i></a>';            
+            }else if($status == "non_aktif"){
+                $actions .= ' <a class="btn btn-xs btn-danger" onclick="return confirm(\'Yakin hapus?\');" href="'.base_url().'kategori_buku/hapus/'.$id_kategori_buku.'?s=hapus" title="Hapus"><i class="fa fa-trash"></i></a>';            
+                $actions .= ' <a class="btn btn-xs btn-success" onclick="return confirm(\'Yakin aktifkan kembali?\');" href="'.base_url().'kategori_buku/hapus/'.$id_kategori_buku.'?s=aktif" title="Aktif"><i class="fa fa-check-circle"></i></a>';
+            }
             $gambar_kategori_buku_img = '<img class="img-responsive" style="height=\'200px\';width=\'200px;\'" src="'.base_url('assets/kategori_buku/').$gambar_kategori_buku.'">';
+            $survei = $this->function_lib->get_one('nama_survei','survei','id_survei="'.$id_survei.'"');
             $entry = array('id' => $id_kategori_buku,
                 'cell' => array(
                     'actions' =>  $actions,
                     'no' =>  $no,                    
                     'nama_kategori_buku' =>(trim($nama_kategori_buku)!="")?$nama_kategori_buku:"",
                     'gambar_kategori_buku' =>(trim($gambar_kategori_buku)!="")?$gambar_kategori_buku_img:"",                    
+                    'survei' =>(trim($survei)!="")?$survei:"",                    
                 ),
             );
             $json_data['rows'][] = $entry;
@@ -83,7 +99,8 @@ class Kategori_buku extends CI_Controller {
     			redirect(base_url('kategori_buku/tambah?status='.$validasi['status'].'&msg='.base64_encode($validasi['msg']).''));
     		}
     	}        
-    	$this->load->view('kategori_buku/tambah',null);
+        $data['nama_survei'] = $this->function_lib->findAll('status!="hapus"','survei','nama_survei ASC');
+    	$this->load->view('kategori_buku/tambah',$data,FALSE);
     }
     public function hapus($id_kategori_buku){
     	$cek_id=$this->function_lib->get_one('id_kategori_buku','kategori_buku','id_kategori_buku="'.$id_kategori_buku.'"');
@@ -95,6 +112,7 @@ class Kategori_buku extends CI_Controller {
     	}
     }
     public function edit($id_kategori_buku){
+        $data['nama_survei'] = $this->function_lib->findAll('status!="hapus"','survei','nama_survei ASC');
     	$data_kategori_buku=$this->function_lib->get_row('kategori_buku','id_kategori_buku="'.$id_kategori_buku.'"');
     	if (empty($data_kategori_buku)) {
     		redirect(base_url('kategori_buku?status=500&msg='.base64_encode("kategori_buku tidak ditemukan").''));

@@ -22,6 +22,14 @@
 											<span>Dashboard</span>
 										</a>
 									</li>
+									<li <?php if (isset($cont) AND trim($cont)!="" AND $cont=="survei"): ?>
+										 class="nav-active"
+									<?php endif ?>>
+										<a href="<?php echo base_url('survei'); ?>">											
+											<i class="fa fa-list" aria-hidden="true"></i>
+											<span>Survei</span>
+										</a>
+									</li>
 									<li <?php if (isset($cont) AND trim($cont)!="" AND $cont=="kategori_buku"): ?>
 										 class="nav-active"
 									<?php endif ?>>
@@ -34,8 +42,16 @@
 										 class="nav-active"
 									<?php endif ?>>
 										<a href="<?php echo base_url('buku'); ?>">											
-											<i class="fa fa-user" aria-hidden="true"></i>
+											<i class="fa fa-book" aria-hidden="true"></i>
 											<span>Buku</span>
+										</a>
+									</li>
+									<li <?php if (isset($cont) AND trim($cont)!="" AND $cont=="site_configuration"): ?>
+										 class="nav-active"
+									<?php endif ?>>
+										<a href="<?php echo base_url('site_configuration/edit'); ?>">							
+											<i class="fa fa-cog" aria-hidden="true"></i>
+											<span>Pengaturan</span>
 										</a>
 									</li>
 

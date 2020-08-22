@@ -121,7 +121,7 @@ class uploader {
         )
             $this->cms = $this->get['cms'];
 
-		// LINKING UPLOADED FILE
+        // LINKING UPLOADED FILE
         if (count($_FILES))
             $this->file = &$_FILES[key($_FILES)];
 

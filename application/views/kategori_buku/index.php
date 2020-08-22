@@ -26,6 +26,7 @@
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.custom.css" />
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css" />
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/morris/morris.css" />
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/select2/select2.css" />
 
 		<!-- Theme CSS -->
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/stylesheets/theme.css" />
@@ -87,6 +88,21 @@
 											<label>Nama Kategori Buku</label>
 											<input type="text" class="form-control input-sm" name="nama_kategori_buku" id="nama_kategori_buku">
 										</div>
+                                        <div class="form-group">
+                                            <label>Status</label>
+                                            <select class="form-control" id="status_kategori">
+                                                <option value="aktif">Aktif</option>
+                                                <option value="non_aktif">Non Aktif</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nama Survei</label>
+                                            <select class="form-control select2" id="nama_survei">
+                                                <?php foreach ($nama_survei as $key => $value): ?>
+                                                    <option value="<?php echo $value['id_survei'] ?>"><?php echo $value['nama_survei']; ?></option>
+                                                <?php endforeach ?>
+                                            </select>
+                                        </div>
 										<div class="form-group">
 											<button class="btn btn-primary pull-right" onclick="grid_reload();return false;"> Cari</button>
 										</div>
@@ -118,6 +134,7 @@
 		<script src="<?php echo base_url(); ?>assets/vendor/jquery-ui/js/jquery-ui-1.10.4.custom.js"></script>
 		<script src="<?php echo base_url(); ?>assets/vendor/jquery-ui-touch-punch/jquery.ui.touch-punch.js"></script>
 		<script src="<?php echo base_url(); ?>assets/vendor/jquery-appear/jquery.appear.js"></script>
+        <script src="<?php echo base_url(); ?>assets/vendor/select2/select2.js"></script>
 				
 		
 		
@@ -134,7 +151,7 @@
         
 		<!-- Examples -->
 		<script type="text/javascript">
-			 
+			     $('.select2').select2();
                     $("#gridview").flexigrid({
                         dataType: 'json',
                         colModel: [
@@ -143,6 +160,7 @@
                             { display: 'Aksi', name: 'actions', width: 100, sortable: false, align: 'center' },
                             { display: 'Nama Kategori Buku', name: 'nama_kategori_buku', width: 200, sortable: true, align: 'left' },
                             { display: 'Gambar Kategori Buku', name: 'gambar_kategori_buku', width: 200, sortable: true, align: 'left' },
+                            { display: 'Survei', name: 'survei', width: 200, sortable: true, align: 'left' },
                            
                         ],
                         buttons: [
@@ -229,8 +247,10 @@
 
                     function grid_reload() {
                         var nama_kategori_buku=$("#nama_kategori_buku").val();
+                        var status_kategori=$("#status_kategori").val();
                         
-                        var url_service="?nama_kategori_buku="+nama_kategori_buku;
+                        var url_service="?nama_kategori_buku="+nama_kategori_buku
+                        +'&status_kategori='+status_kategori;                        
                         $("#gridview").flexOptions({url:'<?php echo base_url(); ?>kategori_buku/get_data'+url_service}).flexReload();
                     }
                     

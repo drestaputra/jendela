@@ -40,6 +40,8 @@ class Buku extends Rest_Controller {
         }else{$totalPage=0;}
         foreach ($response as $key => $value) {
             $response[$key]['kategori']=$this->function_lib->get_row('kategori_buku','id_kategori_buku="'.$value['id_kategori_buku'].'"');
+            $response[$key]['gambar_buku'] = isset($response[$key]['gambar_buku']) ? $response[$key]['gambar_buku'] : "";
+            $response[$key]['gambar_buku'] = base_url('assets/image_buku/').$response[$key]['gambar_buku'];
         }
         $json_data = array('status'=>$status,'msg'=>$msg,'page' => $start,'totalPage'=>$totalPage, 'recordsFiltered' => ((int)$this->input->post('perPage')>0)?$this->input->post('perPage'):$total, 'totalRecords' => $total, 'data' => $response);
        
@@ -50,6 +52,10 @@ class Buku extends Rest_Controller {
     {
         $id_buku=$this->input->post('id_buku');
         $dataBuku=$this->function_lib->get_row('buku','id_buku="'.$id_buku.'"');
+        if (!empty($dataBuku)) {
+            $dataBuku['deskripsi_buku'] = str_replace('/assets/kcfinder/', base_url().'/assets/kcfinder/', $dataBuku['deskripsi_buku']);
+            $dataBuku['gambar_buku'] = base_url('assets/image_buku/').$dataBuku['gambar_buku'];
+        }
         $this->response($dataBuku);    
     }
     public function data_buku_favorit_post()
@@ -71,6 +77,8 @@ class Buku extends Rest_Controller {
         }else{$totalPage=0;}
         foreach ($response as $key => $value) {
             $response[$key]['kategori']=$this->function_lib->get_row('kategori_buku','id_kategori_buku="'.$value['id_kategori_buku'].'"');
+            $response[$key]['gambar_buku'] = isset($response[$key]['gambar_buku']) ? $response[$key]['gambar_buku'] : "";
+            $response[$key]['gambar_buku'] = base_url('assets/image_buku/').$response[$key]['gambar_buku'];
         }
         $json_data = array('status'=>$status,'msg'=>$msg,'page' => $start,'totalPage'=>$totalPage, 'recordsFiltered' => ((int)$this->input->post('perPage')>0)?$this->input->post('perPage'):$total, 'totalRecords' => $total, 'data' => $response);
        

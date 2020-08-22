@@ -14,9 +14,22 @@ class Mkategori_buku extends CI_Model {
             $params['order_by'] =$order_by;
         }
         $order_by=$this->input->post('order_by');
-        if (trim($order_by)) {
+        if (trim($order_by)!="") {
         	$params['order_by'] = $order_by;
         }
+        $id_survei=$this->input->post('id_survei');
+        if (trim($id_survei)!="") {
+            $where .= ' AND id_survei ="'.$id_survei.'"';
+        }
+        $pencarian = $this->input->post('pencarian',TRUE);
+        if (trim($pencarian)!="") {
+            $where .= ' AND upper(nama_kategori_buku) = "'.strtoupper($this->db->escape_str($pencarian)).'"';
+        }
+        $nama_survei = $this->input->post('nama_survei');
+        if (trim($nama_survei)!="") {
+            $where .= ' AND id_survei IN (SELECT id_survei FROM survei WHERE UPPER(nama_survei)="'.$nama_survei.'" )';
+        }
+
 
         if(isset($_POST["sort"]["type"]) && isset($_POST["sort"]["field"]) && ($_POST["sort"]["type"]!="" && $_POST["sort"]["field"]!="")){
             $params["order_by"]=$_POST["sort"]["field"].' '.$_POST["sort"]["type"];
@@ -45,6 +58,11 @@ class Mkategori_buku extends CI_Model {
         $msg="";
         $this->load->library('form_validation');
         $this->form_validation->set_rules('nama_kategori_buku', 'Nama kategori_buku', 'trim|required|min_length[2]|max_length[200]',
+             array(
+                'required'      => '%s masih kosong',                
+            )
+        );   
+        $this->form_validation->set_rules('id_survei', 'Survei', 'trim|required',
              array(
                 'required'      => '%s masih kosong',                
             )
@@ -85,6 +103,7 @@ class Mkategori_buku extends CI_Model {
             $this->image_lib->initialize($config);
             $this->image_lib->resize();
             $nama_kategori_buku=$this->input->post('nama_kategori_buku',TRUE);            
+            $id_survei=$this->input->post('id_survei',TRUE);            
 
             $data = $this->upload->data(); 
             $thumbnail = $data['raw_name'].'-'.$unique_time.$data['file_ext']; 
@@ -92,6 +111,7 @@ class Mkategori_buku extends CI_Model {
             $insertData = array(
                 "nama_kategori_buku" => $nama_kategori_buku,
                 "gambar_kategori_buku" => $thumbnail,
+                "id_survei" => $id_survei,
             );
 
             $status = 200;
@@ -102,17 +122,23 @@ class Mkategori_buku extends CI_Model {
         return array("status"=>$status,"msg"=>$msg);
     }
     function hapus($id_kategori_buku){
-        $gambar_kategori_buku=$this->function_lib->get_one('gambar_kategori_buku','kategori_buku','id_kategori_buku="'.$id_kategori_buku.'"');
+        // $gambar_kategori_buku=$this->function_lib->get_one('gambar_kategori_buku','kategori_buku','id_kategori_buku="'.$id_kategori_buku.'"');
         
-        if (file_exists(FCPATH.'assets/kategori_buku/'.$gambar_kategori_buku) && $gambar_kategori_buku != "") {
-            unlink(FCPATH.'assets/kategori_buku/'.$gambar_kategori_buku);
-        }        
-        echo "</pre>";
+        // if (file_exists(FCPATH.'assets/kategori_buku/'.$gambar_kategori_buku) && $gambar_kategori_buku != "") {
+        //     unlink(FCPATH.'assets/kategori_buku/'.$gambar_kategori_buku);
+        // }        
+        // echo "</pre>";
+        $status = $this->input->get('s',TRUE);
+        $status = trim($status)!="" ? $status : "non_aktif";
+        $columnUpdate = array(
+            "status" => $status
+        );
         $this->db->where('id_kategori_buku', $id_kategori_buku);
-        $this->db->delete('kategori_buku');
+        $this->db->update('kategori_buku', $columnUpdate);
     }
     function edit($id_kategori_buku){
         $nama_kategori_buku=$this->input->post('nama_kategori_buku',TRUE);            
+        $id_survei=$this->input->post('id_survei',TRUE);            
         $unique_time = time();
         $config['upload_path']          = 'assets/kategori_buku';
         $config['allowed_types']        = 'gif|jpg|png|jpeg';
@@ -145,6 +171,7 @@ class Mkategori_buku extends CI_Model {
                 $updateData = array(
                     "nama_kategori_buku" => $nama_kategori_buku,
                     "gambar_kategori_buku" => $thumbnail,
+                    "id_survei" => $id_survei,
                 );
                 
                 $status = 200;
@@ -157,7 +184,8 @@ class Mkategori_buku extends CI_Model {
                 $status = 200;
                 $msg = "Berhasil mengubah Kategori";
                 $updateData = array(
-                    "nama_kategori_buku" => $nama_kategori_buku,                
+                    "nama_kategori_buku" => $nama_kategori_buku,   
+                    "id_survei" => $id_survei,             
                 );
                 $this->db->where('id_kategori_buku', $id_kategori_buku);
                 $post=$this->input->post();

@@ -95,6 +95,34 @@
                                                 
                                             </div>                                            
                                         </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">App Name <span class="required">*</span></label>
+                                            <div class="col-sm-10">
+                                                                                                    
+                                                    <input type="text" name="app_name" value="<?php echo ($this->input->post('app_name')!="")?$this->input->post('app_name'):$app_name; ?>" class="form-control" placeholder="App name.." required/>
+                                            </div>                                            
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">App Description <span class="required">*</span></label>
+                                            <div class="col-sm-10">
+                                                                                                    
+                                                    <input type="text" name="app_description" value="<?php echo ($this->input->post('app_description')!="")?$this->input->post('app_description'):$app_description; ?>" class="form-control" placeholder="App description.." required/>
+                                            </div>                                            
+                                        </div>
+                                         <div class="form-group">
+                                            <label class="col-sm-2 control-label">App Developer <span class="required">*</span></label>
+                                            <div class="col-sm-10">
+                                                                                                    
+                                                    <input type="text" name="app_dev" value="<?php echo ($this->input->post('app_dev')!="")?$this->input->post('app_dev'):$app_dev; ?>" class="form-control" placeholder="App developer.." required/>
+                                            </div>                                            
+                                        </div>
+                                          <div class="form-group">
+                                            <label class="col-sm-2 control-label">App Developer Website<span class="required">*</span></label>
+                                            <div class="col-sm-10">
+                                                                                                    
+                                                    <input type="text" name="app_dev_web" value="<?php echo ($this->input->post('app_dev_web')!="")?$this->input->post('app_dev_web'):$app_dev_web; ?>" class="form-control" placeholder="App developer Website.." required/>
+                                            </div>                                            
+                                        </div>
                                     </div>
                                     <footer class="panel-footer">
                                         <div class="row">

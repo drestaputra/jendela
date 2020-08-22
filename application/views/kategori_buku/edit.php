@@ -26,6 +26,7 @@
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.custom.css" />
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css" />
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/morris/morris.css" />
+		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/select2/select2.css" />
 
 		<!-- Theme CSS -->
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/stylesheets/theme.css" />
@@ -82,10 +83,21 @@
                                             <label class="col-sm-2 control-label">Nama Kategori Buku <span class="required">*</span></label>
                                             <div class="col-sm-10">
                                                                                                     
-                                                    <input type="text" name="nama_kategori_buku" value="<?php echo (trim($kategori_buku['nama_kategori_buku'])!="")?$kategori_buku['nama_kategori_buku']:""; ?>" class="form-control" placeholder="Nama blok.." required/>
+                                                    <input type="text" name="nama_kategori_buku" value="<?php echo (trim($kategori_buku['nama_kategori_buku'])!="")?$kategori_buku['nama_kategori_buku']:""; ?>" class="form-control" placeholder="Nama kategori.." required/>
                                                 
                                             </div>                                            
                                         </div>                                      
+                                         <div class="form-group">
+                                            <label class="col-sm-2 control-label">Survei</label>
+                                            <div class="col-sm-8" >
+                                                <select class="form-control select2" name="id_survei" required style="width: 200px;">
+                                                    <?php foreach ($nama_survei as $key => $value): ?>      
+                                                    <option <?php if ($value['id_survei']==$kategori_buku['id_survei']): ?>
+                                                        selected <?php endif ?> value="<?php echo $value['id_survei'] ?>"><?php echo $value['nama_survei']; ?></option>
+                                                    <?php endforeach ?>
+                                                </select>
+                                            </div>
+                                        </div>
                                          <div class="form-group">
                                             <label class="col-sm-2 control-label">Gambar Kategori Buku <span class="required">*</span></label>
                                             <div class="col-sm-4">
@@ -95,6 +107,7 @@
                                                 <img class="img-responsive img-thumbnail" src="<?php echo base_url('assets/kategori_buku/'.$kategori_buku['gambar_kategori_buku']); ?>">
                                             </div>
                                         </div>
+                                       
                                     </div>
                                     <footer class="panel-footer">
                                         <div class="row">
@@ -128,6 +141,7 @@
         <script src="<?php echo base_url(); ?>assets/vendor/jquery-ui-touch-punch/jquery.ui.touch-punch.js"></script>
         <script src="<?php echo base_url(); ?>assets/vendor/fuelux/js/spinner.js"></script>
         <script src="<?php echo base_url(); ?>assets/vendor/jquery-validation/jquery.validate.js"></script>
+        <script src="<?php echo base_url(); ?>assets/vendor/select2/select2.js"></script>
      
 		<!-- Theme Initialization Files -->
         <!-- Theme Base, Components and Settings -->
@@ -139,10 +153,10 @@
         <!-- Theme Initialization Files -->
         <script src="<?php echo base_url(); ?>assets/javascripts/theme.init.js"></script>
 		
-        <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+       
         <script src="<?php echo base_url(); ?>assets/javascripts/forms/examples.validation.js"></script>        
-        <script>
-            CKEDITOR.replace( 'ckeditor' );
-        </script>
+       	<script type="text/javascript">
+       		$('.select2').select2();
+       	</script>
 	</body>
 </html>

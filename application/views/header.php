@@ -31,9 +31,7 @@
 						<div class="dropdown-menu">
 							<ul class="list-unstyled">
 								<li class="divider"></li>
-								<li>
-									<a role="menuitem" tabindex="-1" href="#"><i class="fa fa-user"></i> My Profile</a>
-								</li>								
+								
 								<li>
 									<a role="menuitem" tabindex="-1" href="<?php echo base_url('logout'); ?>"><i class="fa fa-power-off"></i> Logout</a>
 								</li>

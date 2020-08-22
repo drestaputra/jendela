@@ -4,7 +4,7 @@
 
 		<!-- Basic -->
 		<meta charset="UTF-8">
-		<title>Tambah Blok | <?php echo function_lib::get_config_value('website_name'); ?></title>
+		<title>Tambah Kategori Buku | <?php echo function_lib::get_config_value('website_name'); ?></title>
 		<meta name="keywords" content="Dashboard Admin - Jendela BPS" />
 		<meta name="description" content="<?php echo function_lib::get_config_value('website_seo'); ?>">
 		<meta name="author" content="Drestaputra - Inolabs">
@@ -25,6 +25,7 @@
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.custom.css" />
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css" />
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/morris/morris.css" />
+		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/select2/select2.css" />
 
 		<!-- Theme CSS -->
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/stylesheets/theme.css" />
@@ -51,7 +52,7 @@
 
 				<section role="main" class="content-body">
 					<header class="page-header">
-						<h2>Blok</h2>
+						<h2>Kategori Buku</h2>
 					
 						<div class="right-wrapper pull-right">
 							<ol class="breadcrumbs">
@@ -60,7 +61,7 @@
 										<i class="fa fa-home"></i>
 									</a>
 								</li>
-								<li><span>Blok</span></li>
+								<li><span>Kategori Buku</span></li>
 							</ol>
 					
 							<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
@@ -68,7 +69,7 @@
 					</header>
 					<div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Tambah Blok</h3>
+                            <h3 class="panel-title">Tambah Kategori Buku</h3>
                                 <div class="panel-actions">
                                             <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
                                             <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
@@ -90,12 +91,23 @@
                                                 
                                             </div>                                            
                                         </div>
+                                         <div class="form-group">
+                                            <label class="col-sm-2 control-label">Survei</label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control select2" name="id_survei" required style="width: 200px;">
+                                                    <?php foreach ($nama_survei as $key => $value): ?>      
+                                                    <option value="<?php echo $value['id_survei'] ?>"><?php echo $value['nama_survei']; ?></option>
+                                                    <?php endforeach ?>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">Gambar Kategori Buku <span class="required">*</span></label>
                                             <div class="col-sm-10">
-                                                <input type="file" class="form-control" name="gambar_kategori_buku">
+                                                <input type="file" class="form-control" name="gambar_kategori_buku" required>
                                             </div>
                                         </div>
+                                       
 
                                     </div>
                                     <footer class="panel-footer">
@@ -129,6 +141,7 @@
         <script src="<?php echo base_url(); ?>assets/vendor/jquery-ui-touch-punch/jquery.ui.touch-punch.js"></script>
         <script src="<?php echo base_url(); ?>assets/vendor/fuelux/js/spinner.js"></script>
         <script src="<?php echo base_url(); ?>assets/vendor/jquery-validation/jquery.validate.js"></script>
+        <script src="<?php echo base_url(); ?>assets/vendor/select2/select2.js"></script>
      
 		<!-- Theme Initialization Files -->
         <!-- Theme Base, Components and Settings -->
@@ -141,6 +154,8 @@
         <script src="<?php echo base_url(); ?>assets/javascripts/theme.init.js"></script>
 		        
         <script src="<?php echo base_url(); ?>assets/javascripts/forms/examples.validation.js"></script>        
-       
+       <script type="text/javascript">
+       	$('.select2').select2();
+       </script>
 	</body>
 </html>

@@ -12,6 +12,7 @@ class Madmin extends CI_Model {
 		if ($query->num_rows()!=null) {			
 		$data=$query->row_array();					
 			$this->session->set_userdata("admin",$data);		
+			$this->session->set_userdata('file_manager',true);
 			return true;
 		}else{
 			return false;

@@ -1,104 +1,126 @@
 <?php
-
 /** This file is part of KCFinder project
-  *
-  *      @desc Base configuration file
-  *   @package KCFinder
-  *   @version 2.51
-  *    @author Pavel Tzonkov <pavelc@users.sourceforge.net>
-  * @copyright 2010, 2011 KCFinder Project
-  *   @license http://www.opensource.org/licenses/gpl-2.0.php GPLv2
-  *   @license http://www.opensource.org/licenses/lgpl-2.1.php LGPLv2
-  *      @link http://kcfinder.sunhater.com
-  */
+*
+* @desc Base configuration file
+* @package KCFinder
+* @version 3.12
+* @author Pavel Tzonkov <sunhater@sunhater.com>
+* @copyright 2010-2014 KCFinder Project
+* @license http://opensource.org/licenses/GPL-3.0 GPLv3
+* @license http://opensource.org/licenses/LGPL-3.0 LGPLv3
+* @link http://kcfinder.sunhater.com
+*/
 
-// IMPORTANT!!! Do not remove uncommented settings in this file even if
-// you are using session configuration.
-// See http://kcfinder.sunhater.com/install for setting descriptions
- 
+/* IMPORTANT!!! Do not comment or remove uncommented settings in this file
+even if you are using session configuration.
+See http://kcfinder.sunhater.com/install for setting descriptions */
+
+ob_start();
+// include('/../../index.php');
+include('../../index.php');
+ob_end_clean();
+$CI =& get_instance();
+$CI->load->driver('session');
+if(@$_SESSION['file_manager'] == TRUE){
+$status= false;
+} else {
+$status= true;
+}
 $_CONFIG = array(
+// GENERAL SETTINGS
+'disabled' => $status,
+'uploadURL' => "upload",
+'uploadDir' => "",
+'theme' => "default",
 
-    'disabled' => $status,
-    'denyZipDownload' => false,
-    'denyUpdateCheck' => false,
-    'denyExtensionRename' => false,
+'types' => array(
 
-    'theme' => "oxygen",
+// (F)CKEditor types
+'files' => "",
+'flash' => "swf",
+'images' => "*img",
 
-    'uploadURL' => "upload",
-    'uploadDir' => "",
+// TinyMCE types
+'file' => "",
+'media' => "swf flv avi mpg mpeg qt mov wmv asf rm",
+'image' => "*img",
+),
 
-    'dirPerms' => 0755,
-    'filePerms' => 0644,
+// IMAGE SETTINGS
 
-    'access' => array(
+'imageDriversPriority' => "imagick gmagick gd",
+'jpegQuality' => 90,
+'thumbsDir' => ".thumbs",
 
-        'files' => array(
-            'upload' => true,
-            'delete' => true,
-            'copy' => true,
-            'move' => true,
-            'rename' => true
-        ),
+'maxImageWidth' => 0,
+'maxImageHeight' => 0,
 
-        'dirs' => array(
-            'create' => true,
-            'delete' => true,
-            'rename' => true
-        )
-    ),
+'thumbWidth' => 100,
+'thumbHeight' => 100,
 
-    'deniedExts' => "exe com msi bat php phps phtml php3 php4 cgi pl",
+'watermark' => "",
 
-    'types' => array(
+// DISABLE / ENABLE SETTINGS
 
-        // CKEditor & FCKEditor types
-        'files'   =>  "",
-        'flash'   =>  "swf",
-        'images'  =>  "*img",
+'denyZipDownload' => false,
+'denyUpdateCheck' => false,
+'denyExtensionRename' => false,
 
-        // TinyMCE types
-        'file'    =>  "",
-        'media'   =>  "swf flv avi mpg mpeg qt mov wmv asf rm",
-        'image'   =>  "*img",
-    ),
+// PERMISSION SETTINGS
 
-    'filenameChangeChars' => array(/*
-        ' ' => "_",
-        ':' => "."
-    */),
+'dirPerms' => 0755,
+'filePerms' => 0644,
 
-    'dirnameChangeChars' => array(/*
-        ' ' => "_",
-        ':' => "."
-    */),
+'access' => array(
 
-    'mime_magic' => "",
+'files' => array(
+'upload' => true,
+'delete' => true,
+'copy' => true,
+'move' => true,
+'rename' => true
+),
 
-    'maxImageWidth' => 0,
-    'maxImageHeight' => 0,
+'dirs' => array(
+'create' => true,
+'delete' => true,
+'rename' => true
+)
+),
 
-    'thumbWidth' => 100,
-    'thumbHeight' => 100,
+'deniedExts' => "exe com msi bat cgi pl php phps phtml php3 php4 php5 php6 py pyc pyo pcgi pcgi3 pcgi4 pcgi5 pchi6",
 
-    'thumbsDir' => ".thumbs",
+// MISC SETTINGS
 
-    'jpegQuality' => 90,
+'filenameChangeChars' => array(/*
+' ' => "_",
+':' => "."
+*/),
 
-    'cookieDomain' => "",
-    'cookiePath' => "",
-    'cookiePrefix' => 'KCFINDER_',
+'dirnameChangeChars' => array(/*
+' ' => "_",
+':' => "."
+*/),
 
-    // THE FOLLOWING SETTINGS CANNOT BE OVERRIDED WITH SESSION CONFIGURATION
-    '_check4htaccess' => true,
-    //'_tinyMCEPath' => "/tiny_mce",
+'mime_magic' => "",
 
-    '_sessionVar' => &$_SESSION['KCFINDER'],
-    //'_sessionLifetime' => 30,
-    //'_sessionDir' => "/full/directory/path",
+'cookieDomain' => "",
+'cookiePath' => "",
+'cookiePrefix' => 'KCFINDER_',
 
-    //'_sessionDomain' => ".mysite.com",
-    //'_sessionPath' => "/my/path",
+// THE FOLLOWING SETTINGS CANNOT BE OVERRIDED WITH SESSION SETTINGS
+
+'_normalizeFilenames' => false,
+'_check4htaccess' => true,
+//'_tinyMCEPath' => "/tiny_mce",
+
+'_sessionVar' => "KCFINDER",
+//'_sessionLifetime' => 30,
+//'_sessionDir' => "/full/directory/path",
+//'_sessionDomain' => ".mysite.com",
+//'_sessionPath' => "/my/path",
+
+//'_cssMinCmd' => "java -jar /path/to/yuicompressor.jar --type css {file}",
+//'_jsMinCmd' => "java -jar /path/to/yuicompressor.jar --type js {file}",
+
 );
-
-?>

@@ -24,13 +24,10 @@ class Welcome extends CI_Controller {
 		$this->load->model('Madmin');
 	}
 	public function index(){
-		redirect(base_url('login'));
+		// redirect(base_url('login'));
 	}
 	public function login()
-	{
-		if (!empty($this->session->userdata('admin'))) {
-			redirect(base_url('dashboard'));
-		}
+	{		
 		$this->load->view('login');
 		if ($this->input->post()) {
 			$response=$this->Madmin->cek_login();

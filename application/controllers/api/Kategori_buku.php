@@ -35,6 +35,9 @@ class Kategori_buku extends Rest_Controller {
         $msg = $query_arr['msg'];
         $response=$query->result_array();        
         $perPage=((int)$this->input->post('perPage')>0)?$this->input->post('perPage'):$total;
+        foreach ($response as $key => $value) {
+            $response[$key]['gambar_kategori_buku'] = base_url('assets/kategori_buku/').$value['gambar_kategori_buku'];
+        }
         if ($total!=0) {            
         $totalPage=ceil($total/$perPage)-1;
         }else{$totalPage=0;}       

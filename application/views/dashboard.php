@@ -68,7 +68,86 @@
 						</div>
 					</header>
 
-					
+						<div class="row">
+							<div class="col-md-4">
+								
+								
+										<div class="panel-body">
+											<div class="widget-summary">
+												<div class="widget-summary-col widget-summary-col-icon">
+													<div class="summary-icon bg-primary">
+														<i class="fa fa-list"></i>
+													</div>
+												</div>
+												<div class="widget-summary-col">
+													<div class="summary">
+														<h4 class="title">Jumlah Kategori</h4>
+														<div class="info">
+															<strong class="amount"><?php echo number_format($jml_kategori,0,'.','.') ?></strong>
+														</div>
+													</div>
+													<div class="summary-footer">
+														<a class="text-muted text-uppercase" href="<?php echo base_url('kategori/') ?>">Lihat</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									
+							
+							</div>
+							<div class="col-md-4">
+								
+										<div class="panel-body">
+											<div class="widget-summary">
+												<div class="widget-summary-col widget-summary-col-icon">
+													<div class="summary-icon bg-success">
+														<i class="fa fa-book"></i>
+													</div>
+												</div>
+												<div class="widget-summary-col">
+													<div class="summary">
+														<h4 class="title">Jumlah Buku</h4>
+														<div class="info">
+															<strong class="amount"><?php echo number_format($jml_buku,0,'.','.') ?></strong>
+														</div>
+													</div>
+													<div class="summary-footer">
+														<a class="text-muted text-uppercase" href="<?php echo base_url('buku/') ?>">Lihat</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									
+							</div>
+							<div class="col-md-4">
+								
+								
+								
+										<div class="panel-body">
+											<div class="widget-summary">
+												<div class="widget-summary-col widget-summary-col-icon">
+													<div class="summary-icon bg-danger">
+														<i class="fa fa-heart"></i>
+													</div>
+												</div>
+												<div class="widget-summary-col">
+													<div class="summary">
+														<h4 class="title">Jumlah Favorit</h4>
+														<div class="info">
+															<strong class="amount"><?php echo number_format($jml_favorit,0,'.','.') ?></strong>
+														</div>
+													</div>
+													<div class="summary-footer">
+														<a class="text-muted text-uppercase" href="<?php echo base_url('buku/') ?>">Lihat</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									
+							
+							
+							</div>
+						</div>
 					<!-- end: page -->
 				</section>
 			</div>
@@ -121,8 +200,5 @@
 		<!-- Theme Initialization Files -->
 		<script src="assets/javascripts/theme.init.js"></script>
 
-
-		<!-- Examples -->
-		<script src="assets/javascripts/dashboard/examples.dashboard.js"></script>
 	</body>
 </html>

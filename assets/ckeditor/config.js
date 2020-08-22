@@ -7,12 +7,12 @@ CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here.
 	// For complete reference see:
 	// https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_config.html
-	config.filebrowserBrowseUrl = 'https://jendelasosial.com/assets/kcfinder/browse.php?type=files';
-    config.filebrowserImageBrowseUrl = 'https://jendelasosial.com/assets/kcfinder/browse.php?type=images';
-    config.filebrowserFlashBrowseUrl = 'https://jendelasosial.com/assets/kcfinder/browse.php?type=flash';
-    config.filebrowserUploadUrl = 'https://jendelasosial.com/assets/kcfinder/upload.php?type=files';
-    config.filebrowserImageUploadUrl = 'https://jendelasosial.com/assets/kcfinder/upload.php?type=images';
-    config.filebrowserFlashUploadUrl = 'https://jendelasosial.com/assets/kcfinder/upload.php?type=flash';
+	config.filebrowserBrowseUrl = 'https://jendelasosial.com/assets/kcfinder/browse.php?type=files&responseType=json';
+    config.filebrowserImageBrowseUrl = 'https://jendelasosial.com/assets/kcfinder/browse.php?type=images&responseType=json';
+    config.filebrowserFlashBrowseUrl = 'https://jendelasosial.com/assets/kcfinder/browse.php?type=flash&responseType=json';
+    config.filebrowserUploadUrl = 'https://jendelasosial.com/assets/kcfinder/upload.php?type=files&responseType=json';
+    config.filebrowserImageUploadUrl = 'https://jendelasosial.com/assets/kcfinder/upload.php?type=images&responseType=json';
+    config.filebrowserFlashUploadUrl = 'https://jendelasosial.com/assets/kcfinder/upload.php?type=flash&responseType=json';
     config.filebrowserUploadMethod = 'form';
 
 	// The toolbar groups arrangement, optimized for two toolbar rows.
